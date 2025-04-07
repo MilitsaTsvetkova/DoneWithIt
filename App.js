@@ -1,49 +1,24 @@
+import { useDeviceOrientation } from "@react-native-community/hooks";
 import {
-  Button,
   Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
+  View,
 } from "react-native";
 
 export default function App() {
+  const { landscape } = useDeviceOrientation;
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Text>Hello App!</Text>
-      <Image
-        //  source={require('./assets/icon.png')}
-        source={{
-          uri: "https://example.com/icon.png",
-          width: 200,
-          height: 300,
+      <View
+        style={{
+          backgroundColor: "blue",
+          width: "100%",
+          height: landscape ? "100%" : "30%",
         }}
-      />
-      */}
-
-      <Button
-        title="Click Me"
-        // onPress={() =>
-        //   Alert.alert({
-        //     title: "Button Pressed",
-        //     message: "You clicked the button!",
-        //     buttons: [
-        //       {
-        //         text: "OK",
-        //         onPress: () => console.log("OK Pressed"),
-        //       },
-        //       {
-        //         text: "Cancel",
-        //         onPress: () => console.log("Cancel Pressed"),
-        //       },
-        //     ],
-        //   })
-        // }
-        onPress={() =>
-          Alert.prompt("Button Pressed", "You clicked the button!", (text) =>
-            console.log(text)
-          )
-        }
-      />
+      ></View>
     </SafeAreaView>
   );
 }

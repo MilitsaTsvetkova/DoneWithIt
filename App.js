@@ -17,7 +17,7 @@ export default function App() {
         style={{
           backgroundColor: "blue",
           // flexBasis: 100, //width or height of the item
-          width: 400,
+          width: 100,
           // flexGrow: 1, //if the screen is not enough, it will grow to fill the space
           // flexShrink: 1, //if the screen is not enough, it will shrink to fit the space
           // flex: 1, //flexGrow + flexShrink
@@ -29,6 +29,8 @@ export default function App() {
           backgroundColor: "orange",
           width: 100,
           height: 100,
+          // position: "absolute",
+          top: 50,
         }}
       />
       <View

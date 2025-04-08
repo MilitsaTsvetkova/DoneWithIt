@@ -1,4 +1,5 @@
 import { View } from "react-native";
+import WelcomeScreen from "./app/screens/WelcomeScreen.js";
 
 export default function App() {
   return (
@@ -13,33 +14,7 @@ export default function App() {
         // flexWrap: "wrap", //if the screen is not enough, it will wrap to the next line
       }}
     >
-      <View
-        style={{
-          backgroundColor: "blue",
-          // flexBasis: 100, //width or height of the item
-          width: 100,
-          // flexGrow: 1, //if the screen is not enough, it will grow to fill the space
-          // flexShrink: 1, //if the screen is not enough, it will shrink to fit the space
-          // flex: 1, //flexGrow + flexShrink
-          height: 100,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: "orange",
-          width: 100,
-          height: 100,
-          // position: "absolute",
-          top: 50,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: "tomato",
-          width: 100,
-          height: 100,
-        }}
-      />
+      <WelcomeScreen />
     </View>
   );
 }

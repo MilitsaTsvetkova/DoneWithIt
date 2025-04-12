@@ -1,5 +1,4 @@
 import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import colors from "../config/colors";
 import AppText from "./AppText";
@@ -11,24 +10,21 @@ function ListItem({
   onPress,
   renderRightActions,
   IconComponent,
+  style,
 }) {
   return (
-    <GestureHandlerRootView>
-      <Swipeable renderRightActions={renderRightActions}>
-        <TouchableHighlight onPress={onPress} underlayColor={colors.light}>
-          <View style={styles.container}>
-            {IconComponent}
-            {image && <Image style={styles.image} source={image} />}
-            <View style={styles.detailsContainer}>
-              <AppText style={styles.title}>{title}</AppText>
-              {subTitle && (
-                <AppText style={styles.subTitle}>{subTitle}</AppText>
-              )}
-            </View>
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight onPress={onPress} underlayColor={colors.light}>
+        <View style={[styles.container, style]}>
+          {IconComponent}
+          {image && <Image style={styles.image} source={image} />}
+          <View style={styles.detailsContainer}>
+            <AppText style={styles.title}>{title}</AppText>
+            {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
           </View>
-        </TouchableHighlight>
-      </Swipeable>
-    </GestureHandlerRootView>
+        </View>
+      </TouchableHighlight>
+    </Swipeable>
   );
 }
 

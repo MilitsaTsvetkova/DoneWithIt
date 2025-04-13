@@ -11,10 +11,7 @@ function WelcomeScreen() {
       style={styles.background}
     >
       <View style={styles.logoContainer}>
-        <Image
-          source={require("../assets/logo-red.png")}
-          styles={styles.logo}
-        />
+        <Image source={require("../assets/logo-red.png")} style={styles.logo} />
         <AppText style={styles.tagline}>Sell What You Don't Need</AppText>
       </View>
       <View style={styles.buttonsContainer}>

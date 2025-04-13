@@ -13,8 +13,14 @@ import AppText from "./AppText";
 import PickerItem from "./PickerItem";
 import Screen from "./Screen";
 
-function AppPicker({ placeholder, icon, items }) {
+function AppPicker({ placeholder, icon, items, selectedItem, onItemSelect }) {
   const [visible, setVisible] = useState(false);
+
+  const handleSelectItem = (item) => {
+    onItemSelect(item.label);
+    setVisible(false);
+  };
+
   return (
     <>
       <TouchableWithoutFeedback
@@ -31,7 +37,7 @@ function AppPicker({ placeholder, icon, items }) {
               color={defaultStyles.colors.medium}
             />
           )}
-          <AppText style={styles.text}>{placeholder}</AppText>
+          <AppText style={styles.text}>{selectedItem ?? placeholder}</AppText>
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -48,9 +54,7 @@ function AppPicker({ placeholder, icon, items }) {
             renderItem={({ item }) => (
               <PickerItem
                 label={item.label}
-                onPress={() => {
-                  setVisible(false);
-                }}
+                onPress={() => handleSelectItem(item)}
               />
             )}
           />

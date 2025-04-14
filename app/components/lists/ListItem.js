@@ -36,7 +36,6 @@ function ListItem({
               name="chevron-right"
               size={20}
               color={defaultStyles.colors.medium}
-              style={styles.chevron}
             />
           )}
         </View>
@@ -46,14 +45,15 @@ function ListItem({
 }
 
 const styles = StyleSheet.create({
-  chevron: { alignSelf: "center", marginLeft: "auto" },
   container: {
+    alignSelf: "center",
     flexDirection: "row",
     padding: 15,
   },
   detailsContainer: {
     justifyContent: "center",
     marginLeft: 10,
+    flex: 1,
   },
   image: {
     width: 70,

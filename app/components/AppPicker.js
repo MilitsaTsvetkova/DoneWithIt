@@ -66,7 +66,6 @@ function AppPicker({
             numColumns={numberOfColumns}
             renderItem={({ item }) => (
               <PickerItemComponent
-                label={item.label}
                 onPress={() => handleSelectItem(item)}
                 item={item}
               />

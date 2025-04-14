@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FlatList } from "react-native";
+import Reanimated from "react-native-reanimated";
 import ListItem from "../components/lists/ListItem";
 import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
@@ -39,7 +40,9 @@ function MessagesScreen() {
             image={item.image}
             onPress={() => console.log("Message selected", item)}
             renderRightActions={() => (
-              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+              <Reanimated.View style={{ flexDirection: "row" }}>
+                <ListItemDeleteAction onPress={() => handleDelete(item)} />
+              </Reanimated.View>
             )}
           />
         )}

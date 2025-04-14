@@ -1,5 +1,5 @@
 import { Image, StyleSheet, TouchableHighlight, View } from "react-native";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import colors from "../../config/colors";
 import defaultStyles from "../../config/styles";
@@ -16,7 +16,12 @@ function ListItem({
   showChevrons = false,
 }) {
   return (
-    <Swipeable renderRightActions={renderRightActions}>
+    <ReanimatedSwipeable
+      renderRightActions={renderRightActions}
+      rightThreshold={40}
+      friction={2}
+      enableTrackpadTwoFingerGesture
+    >
       <TouchableHighlight onPress={onPress} underlayColor={colors.light}>
         <View style={[styles.container, style]}>
           {IconComponent}
@@ -40,7 +45,7 @@ function ListItem({
           )}
         </View>
       </TouchableHighlight>
-    </Swipeable>
+    </ReanimatedSwipeable>
   );
 }
 

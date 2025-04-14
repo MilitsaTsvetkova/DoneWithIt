@@ -49,6 +49,7 @@ function AccountScreen(props) {
                 />
               }
               style={styles.listItem}
+              showChevrons={true}
             />
           )}
         />

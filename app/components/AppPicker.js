@@ -13,7 +13,14 @@ import AppText from "./AppText";
 import PickerItem from "./PickerItem";
 import Screen from "./Screen";
 
-function AppPicker({ placeholder, icon, items, selectedItem, onItemSelect }) {
+function AppPicker({
+  placeholder,
+  icon,
+  items,
+  selectedItem,
+  onItemSelect,
+  width = "100%",
+}) {
   const [visible, setVisible] = useState(false);
 
   const handleSelectItem = (item) => {
@@ -26,9 +33,8 @@ function AppPicker({ placeholder, icon, items, selectedItem, onItemSelect }) {
       <TouchableWithoutFeedback
         activeOpacity={0.8}
         onPress={() => setVisible(true)}
-        style={styles.container}
       >
-        <View style={styles.container}>
+        <View style={[styles.container, { width }]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -73,7 +79,6 @@ const styles = StyleSheet.create({
     backgroundColor: defaultStyles.colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginVertical: 10,
     alignItems: "center",

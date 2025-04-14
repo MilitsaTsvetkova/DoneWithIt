@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import AppText from "./AppText";
+import AppText from "../AppText";
 
 function ErrorMessage({ error, visible }) {
   if (!error || !visible) return null;

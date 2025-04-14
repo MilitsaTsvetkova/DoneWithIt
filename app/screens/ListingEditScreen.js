@@ -36,12 +36,7 @@ function ListingEditScreen() {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        <AppFormField
-          name="title"
-          placeholder="Title"
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
+        <AppFormField name="title" placeholder="Title" maxLength={255} />
         <AppFormField
           name="price"
           placeholder="Price"

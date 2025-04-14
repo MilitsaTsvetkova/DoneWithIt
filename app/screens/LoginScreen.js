@@ -1,9 +1,8 @@
 import { Formik } from "formik";
 import { Image, StyleSheet } from "react-native";
-import AppButton from "../components/AppButton";
-import AppTextInput from "../components/AppTextInput";
-import ErrorMessage from "../components/ErrorMessage";
 import Screen from "../components/Screen";
+import AppFormField from "../components/forms/AppFormField";
+import SubmitButton from "../components/forms/SubmitButton";
 
 import * as Yup from "yup";
 
@@ -25,31 +24,27 @@ function LoginScreen() {
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
-        {({ handleChange, handleSubmit, setFieldTouched, errors, touched }) => (
+        {() => (
           <>
-            <AppTextInput
+            <AppFormField
+              name="email"
               icon="email"
               autoCapitalize="none"
               autoCorrect={false}
               placeholder="Email"
               keyboardType="email-address"
               textContentType="emailAddress"
-              onChangeText={handleChange("email")}
-              onBlur={() => setFieldTouched("email")}
             />
-            <ErrorMessage error={errors.email} visible={touched.email} />
-            <AppTextInput
+            <AppFormField
+              name="password"
               autoCapitalize="none"
               autoCorrect={false}
               icon="lock"
               placeholder="Password"
               secureTextEntry
               textContentType="password"
-              onChangeText={handleChange("password")}
-              onBlur={() => setFieldTouched("password")}
             />
-            <ErrorMessage error={errors.password} visible={touched.password} />
-            <AppButton title="Login" onPress={handleSubmit} />
+            <SubmitButton title="Login" />
           </>
         )}
       </Formik>

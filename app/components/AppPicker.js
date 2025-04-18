@@ -26,7 +26,7 @@ function AppPicker({
   const [visible, setVisible] = useState(false);
 
   const handleSelectItem = (item) => {
-    onItemSelect(item.label);
+    onItemSelect(item);
     setVisible(false);
   };
 
@@ -46,7 +46,7 @@ function AppPicker({
             />
           )}
           {selectedItem ? (
-            <AppText style={styles.text}>{selectedItem}</AppText>
+            <AppText style={styles.text}>{selectedItem.label}</AppText>
           ) : (
             <AppText style={styles.placeholder}>{placeholder}</AppText>
           )}

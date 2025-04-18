@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
     .max(10000)
     .label("Price"),
   description: Yup.string().label("Description").optional(),
-  category: Yup.string().required().label("Category").nullable(),
+  category: Yup.object().required().label("Category").nullable(),
   images: Yup.array().min(1, "Please select at least one image"),
 });
 
@@ -58,6 +58,7 @@ function ListingEditScreen() {
     });
 
     if (!result.ok) {
+      console.log(JSON.stringify(result));
       return alert("Could not save the listing.");
     }
     alert("Listing saved.");

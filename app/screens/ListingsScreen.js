@@ -1,8 +1,14 @@
-import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { FlatList, StyleSheet } from "react-native";
 import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
+
+import getListings from "../api/listings";
+import AppButton from "../components/AppButton";
+import AppText from "../components/AppText";
+import Card from "../components/Card";
+import routes from "../navigation/routes";
 
 const listings = [
   {

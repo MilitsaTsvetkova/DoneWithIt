@@ -1,72 +1,115 @@
+import { useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
-import CategoryPickerItem from "../components/CategoryPickerItem";
-import Screen from "../components/Screen";
-import { AppForm, AppFormField, SubmitButton } from "../components/forms";
-import AppFormPicker from "../components/forms/AppFormPicker";
-import FormImagePicker from "../components/forms/FormImagePicker";
-import useLocation from "../hooks/useLocation";
 
 import listingsApi from "../api/listings";
+import CategoryPickerItem from "../components/CategoryPickerItem";
+import Screen from "../components/Screen";
+import {
+  AppForm as Form,
+  AppFormField as FormField,
+  FormImagePicker,
+  AppFormPicker as Picker,
+  SubmitButton,
+} from "../components/forms";
+import useLocation from "../hooks/useLocation";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
-  price: Yup.number()
-    .required()
-    .positive()
-    .integer()
-    .min(1)
-    .max(10000)
-    .label("Price"),
-  description: Yup.string().label("Description").optional(),
-  category: Yup.object().required().label("Category").nullable(),
-  images: Yup.array().min(1, "Please select at least one image"),
+  price: Yup.number().required().min(1).max(10000).label("Price"),
+  description: Yup.string().label("Description"),
+  category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array().min(1, "Please select at least one image."),
 });
 
 const categories = [
   {
+    backgroundColor: "#fc5c65",
+    icon: "floor-lamp",
     label: "Furniture",
     value: 1,
-    icon: "floor-lamp",
-    backgroundColor: "#fc5c65",
   },
-  { label: "Cars", value: 2, icon: "car", backgroundColor: "#fd9644" },
-  { label: "Cameras", value: 3, icon: "camera", backgroundColor: "#fed330" },
-  { label: "Games", value: 4, icon: "cards", backgroundColor: "#26de81" },
   {
+    backgroundColor: "#fd9644",
+    icon: "car",
+    label: "Cars",
+    value: 2,
+  },
+  {
+    backgroundColor: "#fed330",
+    icon: "camera",
+    label: "Cameras",
+    value: 3,
+  },
+  {
+    backgroundColor: "#26de81",
+    icon: "cards",
+    label: "Games",
+    value: 4,
+  },
+  {
+    backgroundColor: "#2bcbba",
+    icon: "shoe-heel",
     label: "Clothing",
     value: 5,
-    icon: "shoe-heel",
-    backgroundColor: "#2bcbba",
   },
-  { label: "Sports", value: 6, icon: "basketball", backgroundColor: "#45aaf2" },
   {
+    backgroundColor: "#45aaf2",
+    icon: "basketball",
+    label: "Sports",
+    value: 6,
+  },
+  {
+    backgroundColor: "#4b7bec",
+    icon: "headphones",
     label: "Movies & Music",
     value: 7,
-    icon: "headphones",
-    backgroundColor: "#4b7bec",
+  },
+  {
+    backgroundColor: "#a55eea",
+    icon: "book-open-variant",
+    label: "Books",
+    value: 8,
+  },
+  {
+    backgroundColor: "#778ca3",
+    icon: "application",
+    label: "Other",
+    value: 9,
   },
 ];
 
 function ListingEditScreen() {
   const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  const handleSubmit = async (listing) => {
-    const result = await listingsApi.addListing({
-      ...listing,
-      location,
-    });
+  const handleSubmit = async (listing, { resetForm }) => {
+    setProgress(0);
+    setUploadVisible(true);
+    const result = await listingsApi.addListing(
+      { ...listing, location },
+      (progress) => setProgress(progress)
+    );
 
     if (!result.ok) {
-      console.log(JSON.stringify(result));
-      return alert("Could not save the listing.");
+      console.log(result);
+      setUploadVisible(false);
+      return alert("Could not save the listing");
     }
-    alert("Listing saved.");
+
+    resetForm();
   };
 
   return (
     <Screen style={styles.container}>
-      <AppForm
+      <UploadScreen
+        onDone={() => setUploadVisible(false)}
+        progress={progress}
+        visible={uploadVisible}
+      />
+      <Form
         initialValues={{
           title: "",
           price: "",
@@ -78,31 +121,31 @@ function ListingEditScreen() {
         validationSchema={validationSchema}
       >
         <FormImagePicker name="images" />
-        <AppFormField name="title" placeholder="Title" maxLength={255} />
-        <AppFormField
-          name="price"
-          placeholder="Price"
+        <FormField maxLength={255} name="title" placeholder="Title" />
+        <FormField
           keyboardType="numeric"
           maxLength={8}
-          width="30%"
+          name="price"
+          placeholder="Price"
+          width={120}
         />
-        <AppFormPicker
-          name="category"
+        <Picker
           items={categories}
-          placeholder="Category"
-          width="50%"
+          name="category"
           numberOfColumns={3}
           PickerItemComponent={CategoryPickerItem}
+          placeholder="Category"
+          width="50%"
         />
-        <AppFormField
-          name="description"
-          placeholder="Description"
-          multiline
-          numberOfLines={3}
+        <FormField
           maxLength={255}
+          multiline
+          name="description"
+          numberOfLines={3}
+          placeholder="Description"
         />
         <SubmitButton title="Post" />
-      </AppForm>
+      </Form>
     </Screen>
   );
 }

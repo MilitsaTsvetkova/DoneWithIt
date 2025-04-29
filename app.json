@@ -2,7 +2,11 @@
   "expo": {
     "name": "DoneWithIt",
     "slug": "DoneWithIt",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -35,7 +39,12 @@
         "projectId": "dd36f219-2694-4f1f-ba5b-43efadc7bf09"
       }
     },
-    "assetBundlePatterns": ["**/*"],
-    "description": "A marketplace for selling the stuff you don't need anymore."
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "description": "A marketplace for selling the stuff you don't need anymore.",
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }

@@ -12,6 +12,8 @@ import {
   SubmitButton,
 } from "../components/forms";
 
+import authStorage from "../auth/storage";
+
 const validationSchema = Yup.object().shape({
   email: Yup.string().email().required().label("Email"),
   password: Yup.string().required().min(4).label("Password"),
@@ -29,6 +31,7 @@ function LoginScreen() {
 
     const user = jwtDecode(result.data);
     setUser(user);
+    authStorage.storeToken(result.data);
   };
 
   return (

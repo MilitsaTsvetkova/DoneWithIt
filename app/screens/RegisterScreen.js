@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
-import loginApi from "../api/auth";
-import registerApi from "../api/users";
+import authApi from "../api/auth";
+import userApi from "../api/users";
 import useAuth from "../auth/useAuth";
+import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
 import {
   AppForm,
@@ -11,6 +12,7 @@ import {
   ErrorMessage,
   SubmitButton,
 } from "../components/forms";
+import useApi from "../hooks/useApi";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -21,10 +23,11 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen() {
   const [error, setError] = useState();
   const auth = useAuth();
+  const registerApi = useApi(userApi.register);
+  const loginApi = useApi(authApi.login);
 
   const handleRegister = async (userInfo) => {
-    const result = await registerApi.register(userInfo);
-    console.log(result);
+    const result = await registerApi.request(userInfo);
     if (!result.ok) {
       if (result.data) {
         setError(result.data.error);
@@ -34,7 +37,7 @@ function RegisterScreen() {
     } else {
       setError(null);
 
-      const { data: authToken } = await loginApi.login(
+      const { data: authToken } = await loginApi.request(
         userInfo.email,
         userInfo.password
       );
@@ -43,6 +46,7 @@ function RegisterScreen() {
   };
   return (
     <Screen>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <AppForm
         initialValues={{ name: "", email: "", password: "" }}
         onSubmit={handleRegister}

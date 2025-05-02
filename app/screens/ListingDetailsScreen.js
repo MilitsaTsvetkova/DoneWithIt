@@ -1,14 +1,19 @@
-import { StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
 import { Image } from "react-native-expo-image-cache";
 import AppText from "../components/AppText";
+import ContactSellerForm from "../components/ContactSellerForm";
 import ListItem from "../components/lists/ListItem";
 import colors from "../config/colors";
 
 function ListingDetailsScreen({ route }) {
-  const { title, price, images } = route.params;
+  const listing = route.params;
+  const { title, price, images } = listing;
 
   return (
-    <View>
+    <KeyboardAvoidingView
+      behavior="position"
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 100}
+    >
       <Image
         uri={images[0].url}
         preview={{ uri: images[0].thumbnailUrl }}
@@ -26,7 +31,8 @@ function ListingDetailsScreen({ route }) {
           image={require("../assets/mosh.jpg")}
         />
       </View>
-    </View>
+      <ContactSellerForm listing={listing} />
+    </KeyboardAvoidingView>
   );
 }
 

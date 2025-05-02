@@ -1,6 +1,7 @@
 import * as Notifications from "expo-notifications";
 import { useEffect } from "react";
 import expoPushTokenApi from "../api/expoPushTokens";
+import logger from "../utility/logger";
 
 // Required
 Notifications.setNotificationHandler({
@@ -30,7 +31,7 @@ export default useNotifications = (notificationListener) => {
       const token = (await Notifications.getExpoPushTokenAsync()).data;
       expoPushTokenApi.register(token);
     } catch (error) {
-      console.log("Error getting a push token", error);
+      logger.log(error);
     }
   };
 };

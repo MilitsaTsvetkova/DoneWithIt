@@ -10,6 +10,7 @@ import {
 } from "react-native";
 
 import colors from "../config/colors";
+import logger from "../utility/logger";
 
 function ImageInput({ imageUri, onChangeImage }) {
   useEffect(() => {
@@ -38,7 +39,7 @@ function ImageInput({ imageUri, onChangeImage }) {
       });
       if (!result.cancelled) onChangeImage(result.assets[0].uri);
     } catch (error) {
-      console.log("Error reading an image", error);
+      logger.log(error);
     }
   };
   return (

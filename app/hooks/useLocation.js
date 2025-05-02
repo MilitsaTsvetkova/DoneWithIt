@@ -1,5 +1,6 @@
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
+import logger from "../utility/logger";
 
 const useLocation = () => {
   const [location, setLocation] = useState(null);
@@ -8,7 +9,7 @@ const useLocation = () => {
     try {
       const { granted } = await Location.requestForegroundPermissionsAsync();
       if (!granted) {
-        console.log("Permission to access location was denied");
+        logger.log("Permission to access location was denied");
         return;
       }
 
@@ -17,7 +18,7 @@ const useLocation = () => {
       } = await Location.getLastKnownPositionAsync();
       setLocation({ latitude, longitude });
     } catch (error) {
-      console.log("Error getting location", error);
+      logger.log("Error getting location", error);
     }
   };
 

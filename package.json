@@ -7,9 +7,11 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "eas-build-on-success": "npx bugsnag-eas-build-on-success"
   },
   "dependencies": {
+    "@bugsnag/expo": "^52.0.0",
     "@expo/metro-runtime": "~4.0.1",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-community/hooks": "^100.1.0",
@@ -22,8 +24,12 @@
     "apisauce": "^3.1.1",
     "dayjs": "^1.11.13",
     "expo": "~52.0.42",
+    "expo-application": "~6.0.2",
     "expo-blur": "~14.0.3",
-    "expo-constants": "^17.0.8",
+    "expo-constants": "~17.0.8",
+    "expo-crypto": "~14.0.2",
+    "expo-device": "~7.0.3",
+    "expo-file-system": "~18.0.12",
     "expo-image-picker": "~16.0.6",
     "expo-location": "~18.0.10",
     "expo-notifications": "~0.29.14",
@@ -48,7 +54,9 @@
     "yup": "^1.6.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@bugsnag/plugin-expo-eas-sourcemaps": "^52.0.0",
+    "@bugsnag/source-maps": "^2.3.3"
   },
   "private": true
 }

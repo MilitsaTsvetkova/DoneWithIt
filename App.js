@@ -10,10 +10,14 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import { navigationRef } from "./app/navigation/rootNavigation";
+import logger from "./app/utility/logger";
 
 SplashScreen.preventAutoHideAsync();
 
+logger.start();
+
 export default function App() {
+  logger.log(new Error("Test error"));
   const [user, setUser] = useState(null);
   const [isReady, setIsReady] = useState(false);
 

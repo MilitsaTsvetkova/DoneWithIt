@@ -37,6 +37,9 @@
     "extra": {
       "eas": {
         "projectId": "dd36f219-2694-4f1f-ba5b-43efadc7bf09"
+      },
+      "bugsnag": {
+        "apiKey": "e26448b2e00b3ac34a62a4684093eef2"
       }
     },
     "assetBundlePatterns": [
@@ -44,7 +47,8 @@
     ],
     "description": "A marketplace for selling the stuff you don't need anymore.",
     "plugins": [
-      "expo-secure-store"
+      "expo-secure-store",
+      "@bugsnag/plugin-expo-eas-sourcemaps"
     ]
   }
 }

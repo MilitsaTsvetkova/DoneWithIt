@@ -17,7 +17,6 @@ SplashScreen.preventAutoHideAsync();
 logger.start();
 
 export default function App() {
-  logger.log(new Error("Test error"));
   const [user, setUser] = useState(null);
   const [isReady, setIsReady] = useState(false);
 

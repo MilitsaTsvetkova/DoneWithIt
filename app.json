@@ -20,6 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.militsa88.DoneWithIt",
+      "buildNumber": "1.0.0",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -29,7 +30,8 @@
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.militsa88.DoneWithIt"
+      "package": "com.militsa88.DoneWithIt",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
@@ -49,6 +51,12 @@
     "plugins": [
       "expo-secure-store",
       "@bugsnag/plugin-expo-eas-sourcemaps"
-    ]
+    ],
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/dd36f219-2694-4f1f-ba5b-43efadc7bf09"
+    }
   }
 }
